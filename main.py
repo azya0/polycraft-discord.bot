@@ -1,3 +1,4 @@
+import datetime
 from configparser import ConfigParser
 from os.path import exists
 import builtins
@@ -68,7 +69,10 @@ if __name__ == '__main__':
     else:
         raise FileExistsError(f'File {CONFIG_PATH} don\'t exist')
 
-    print = lambda *args, **kwargs: (builtins.print("[Discord.Bot]", end=' '), builtins.print(*args, **kwargs))
+    print = lambda *args, **kwargs: (builtins.print(
+            f'[Discord.Bot : {datetime.datetime.now().strftime(f"%Y %b, %d - %H:%M:%S")}]', end=' '
+        ), builtins.print(*args, **kwargs)
+    )
 
     intents = discord.Intents.all()
     client = PolyCraftBot(intents=intents)
